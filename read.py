@@ -19,3 +19,11 @@ filtered_data['Score']=pos_neg
 
 filtered_data.shape
 filtered_data.head()
+
+display = pd.read_sql_query("""
+                        SELECT UserId, ProductId, ProfileName, Time, Score, Text, COUNT(*)
+                        FROM Reviews
+                        GROUP BY UserId
+                        HAVING Count(*)>1
+                        """, 
+                        con)
